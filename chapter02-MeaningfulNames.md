@@ -47,4 +47,4 @@ By using `Class`, it is able to create an intention-revealing function(ex. `isFl
 	- ex. `hp`, `aix`, `sco`: names of Unix platforms or variants.
 	- ex. `accountList` while it's not actually `List` -> `accountGroup`, `accounts`
 - Be careful with names having difference in small part.
-- ex. `XYZControllerForEfficient**Handling**OfStrings`, `XYZControllerForEfficient**Storage**OfStrings`
+	- ex. `XYZControllerForEfficient**Handling**OfStrings`, `XYZControllerForEfficient**Storage**OfStrings`
