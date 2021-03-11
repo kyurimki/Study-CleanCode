@@ -48,3 +48,21 @@ By using `Class`, it is able to create an intention-revealing function(ex. `isFl
 	- ex. `accountList` while it's not actually `List` -> `accountGroup`, `accounts`
 - Be careful with names having difference in small part.
 	- ex. `XYZControllerForEfficient**Handling**OfStrings`, `XYZControllerForEfficient**Storage**OfStrings`
+- Inconsistent spellings can cause disinformation. -> Spelling similar concepts similarly is needed.
+	- ex. `O and l` that can be misunderstood as `0 and 1` respectively.
+## Make Meaningful Distinctions
+- If there are differences on names, there should be something different.
+- Number-series naming
+	- ex. `a1, a2, ..., aN`
+	- non-informative; not providing a clue for author's intention.
+	- ex.
+```
+public static void copyChars(char a1[], char a2[]) {
+	for(int i = 0; i < a1.length; i++) {
+		a2[i] = a1[i];
+	}
+}
+```
+This function would be more helpful when `char a1[]` and `char a2[]` are named as `source` and `destination`.
+- Noise words
+	- ex. `ProductInfo`, `ProductData` on `Class Product`
