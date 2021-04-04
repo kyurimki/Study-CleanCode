@@ -1,3 +1,4 @@
+
 # Chapter 02. Meaningful Names
 ## Use Intention-Revealing Names
 - Names should **REVEAL INTENT**
@@ -65,4 +66,144 @@ public static void copyChars(char a1[], char a2[]) {
 ```
 This function would be more helpful when `char a1[]` and `char a2[]` are named as `source` and `destination`.
 - Noise words
-	- ex. `ProductInfo`, `ProductData` on `Class Product`
+	- ex. `ProductInfo`, `ProductData` in `Class Product`: indistinct noise on `Info` and `Data`
+	- Noise words are redundant.
+- **Distinguish names should offer differences to readers.**
+
+## Use Pronounceable Names
+- The variables names should be pronounceable. Because programming is a social activity.
+```
+class DtaRcrd102 {
+    private Date genymdhms;
+    private Date modymdhms;
+    private final String pszqint = "102";
+}
+```
+```
+class Customer {
+    private Date generationTimeStamp;
+    private Date modificationTimeStamp;
+    private final String recordId = "102";
+}
+```
+## Use Searchable Names
+- Longer names and searchable names are recommended than short names and a constant.
+- ex. **e**
+	- the most common letter in English
+	- If it is defined as a variable, it could be found every code line.
+- Single-letter names used as local-variables.
+- If a variable/constant shows up multiple places, it should be given a search-friendly name.
+```
+for(int j = 0; j < 34; j++) {
+	s += (t[j]*4) / 5;
+```
+```
+int realDaysPerIdealDay = 4;
+const int WORK_DAYS_PER_WEEK = 5;
+int sum = 0;
+for(int j = 0; j < NUMBER_OF_TASKS; j++) {
+	int realTaskDays = taskEstimate[j] * realDaysPerIdealDay;
+	int realTaskWeeks = (realdays / WORK_DAYS_PER_WEEK);
+	sum += realTaskWeeks;
+```
+- `sum`: not a useful name but at least searchable than `s`
+- The intentionally named code makes a longer function, but much easier to find `WORK_DAYS_PER_WEEK` than `5` itself.
+## Avoid Encodings
+### Hungarian Notation
+[Hungarian notation](https://en.wikipedia.org/wiki/Hungarian_notation)
+## Class Names
+- Classes and objects should have noun or noun phrase names.
+- ex. `Customer`, `WikiPage`, `Account`, and `AddressParser`
+- Not Recommended: `Manager`, `Processor`, `Data`, or `Info`
+- A verb cannot be used as a class name.
+## Method Names
+- Methods should have verb or verb phrase names
+- ex. `postPayment`, `deletePage`, or `save`
+```
+string name = employee.getName();
+customer.setName("mike");
+if(paycheck.isPosted()) ...
+```
+- When constructors are overloaded, use static methods with names describing the arguments.
+`Complex fulcrmPoint = Complex.FromRealNumber(23.0);` is better than `Complex fulcrumPoint = new Complex(23.0);`
+## Don't Be Cute
+- Choose clarity over entertainment value.
+- **Say what you mean. Mean what you say.**
+## Pick One Word per Concept
+- Choose one word for one abstract concept and stick with it for total code.
+- ex. `DeviceManager`-`ProtocolController`: choose one 'manager' or 'controller' and use one.
+## Don't Pun
+- Do not use the same word for multiple purposes.
+- ex. `add` for "adding or concatenating two values"
+	- if defining method that puts its single parameter into a collection, is it appropriate to use `add`?
+	- -> using `insert` or `append` is appropriate instead of add.
+## Add Meaningful Context
+- Names in context should be placed by enclosing them in well-named classes, functions, or namespaces.
+```
+private void printGuessStatistics(char candidate, int count) {
+	String number;
+	String verb;
+	String pluralModifier;
+	if(count == 0) {
+		number = "no";
+		verb = "are";
+		pluralModifier = "s";
+	} else if(count == 1) {
+		number = "1";
+		verb = "is";
+		pluralModifier = "";
+	} else {
+		number = "Integer.toString(count)";
+		verb = "are";
+		pluralModifier = "s";
+	}
+	String guessMessage = String.format("There %s %s %s%s", verb, number, candidate, pluralModifier);
+	print(guessMessage);
+}
+```
+```
+public class GuessStatisticsMessage {
+	private String number;
+	private String verb;
+	private String plurarlModifier;
+	
+	public String make(char candidate, int count) {
+		createPluralDependentMessageParts(count);
+		return String.format("There %s %s %s%s", verb, number, candidate, pluralModifier);
+	}
+	
+	private void createPluralDependentMessageParts(int count) {
+		if(count == 0) {
+			thereAreNoLetters();
+		} else if(count == 1) {
+			thereIsOneLetter();
+		} else {
+			thereAreManyLetters(count);
+		}
+	}
+
+	private void thereAreManyLetters(int count) {
+		number = Integer.toString(count);
+		verb = "are";
+		pluralModifier = "s";
+	}
+
+	private void thereIsOneLetter() {
+		number = "1";
+		verb = "is";
+		pluralModifier = "";
+	}
+
+	private void thereAreNoLetters() {
+		number = "no";
+		verb = "are";
+		pluralModifier = "s";
+	}
+}
+```
+## Don't Add Gratuitous Context
+- As long as shorter names are clear, they are better than longer ones.
+- Examples:
+	- `Address`: fine name for class
+	- `accountAddress`, `customerAddress`: fine names for instances of the class `Address`
+	- `PostalAddress`, `MAC`, `URI` <=> post address, MAC address, web address
